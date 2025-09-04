@@ -107,18 +107,18 @@
         <!-- Email Form -->
         <motion.div class="max-w-lg mx-auto" :initial="{ opacity: 0, y: 30 }" :animate="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.8, delay: 1.2, ease: 'easeOut' }">
-            <form class="space-y-6" role="form" aria-labelledby="waitlist-title" @submit.prevent="joinWaitlist">
-                <h2 id="waitlist-title" class="sr-only">Rejoindre la liste d'attente</h2>
+            <form class="space-y-6" role="form" aria-labelledby="signup-title" @submit.prevent="joinWaitlist">
+                <h2 id="signup-title" class="sr-only">S'inscrire à la Reels Academy</h2>
                 <motion.div class="flex flex-col sm:flex-row gap-3 sm:gap-4" :initial="{ opacity: 0, scale: 0.95 }"
                     :animate="{ opacity: 1, scale: 1 }" :transition="{ duration: 0.6, delay: 1.4, ease: 'easeOut' }">
                     <UInput v-model="email" type="email" placeholder="Entrez votre adresse email" class="flex-1"
                         color="neutral" variant="outline" size="lg" :ui="{
                             base: 'h-12 sm:h-14 text-sm sm:text-base placeholder:text-gray-400 dark:placeholder:text-gray-500'
-                        }" aria-label="Adresse email pour rejoindre la liste d'attente" required />
+                        }" aria-label="Adresse email pour s'inscrire à la Reels Academy" required />
                     <Button type="submit" variant="glass" size="lg" :loading="loading"
                         class="h-12 sm:h-14 text-sm sm:text-base" trailing-icon="i-lucide-arrow-up-right"
-                        :aria-label="loading ? 'Inscription en cours...' : 'Rejoindre la liste d\'attente'">
-                        <span v-if="!loading">Je veux rejoindre la liste</span>
+                        :aria-label="loading ? 'Inscription en cours...' : 'S\'inscrire à la Reels Academy'">
+                        <span v-if="!loading">Je veux m'inscrire</span>
                         <span v-else>Inscription...</span>
                     </Button>
                 </motion.div>

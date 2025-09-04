@@ -84,8 +84,9 @@
                         class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-lg mx-auto"
                         :initial="{ opacity: 0, y: 20 }" :animate="{ opacity: 1, y: 0 }"
                         :transition="{ duration: 0.8, delay: 0.8, ease: 'easeOut' }">
-                        Vous êtes maintenant inscrit à notre liste d'attente. Nous vous tiendrons au courant dès que
-                        la Reels Academy sera disponible !
+                        Votre inscription à la Reels Academy a bien été prise en compte. Nous vous contacterons très
+                        bientôt
+                        pour débuter votre formation !
                     </motion.p>
                 </motion.div>
 
@@ -124,7 +125,7 @@ const toggleColorMode = () => {
 // SEO Meta tags
 useSeoMeta({
     title: 'Merci ! - Reels Academy',
-    description: 'Merci de vous être inscrit à notre liste d\'attente. Vous serez parmi les premiers à découvrir la Reels Academy !',
+    description: 'Votre inscription à la Reels Academy a bien été prise en compte. Nous vous contacterons très bientôt pour débuter votre formation !',
     robots: 'noindex, nofollow'
 })
 </script>
