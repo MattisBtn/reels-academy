@@ -26,7 +26,7 @@
             <motion.span class="inline-block" :initial="{ opacity: 0, filter: 'blur(10px)', y: 20 }"
                 :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
                 :transition="{ duration: 0.8, delay: 0.5, ease: 'easeOut' }">
-                Créer
+                Créez
             </motion.span>
             {{ ' ' }}
             <motion.span class="inline-block" :initial="{ opacity: 0, filter: 'blur(10px)', y: 20 }"
