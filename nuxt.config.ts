@@ -16,10 +16,10 @@ export default defineNuxtConfig({
 
   // Site configuration for SEO
   site: {
-    url: "https://tooka.io",
-    name: "Tooka",
+    url: "https://reelsacademy.fr",
+    name: "Reels Academy",
     description:
-      "La plateforme qui accompagne les créatifs du brief initial à la livraison finale. Gérez vos projets clients sans stress, avec style.",
+      "La plateforme qui accompagne les indépendants à créer du contenu simple en 4h/semaine.",
     defaultLocale: "fr",
   },
 
