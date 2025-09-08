@@ -22,7 +22,8 @@
         </motion.div>
 
         <!-- Title -->
-        <h1 class="text-5xl md:text-7xl font-medium tracking-tight text-gray-900 dark:text-white">
+        <h1
+            class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-gray-900 dark:text-white">
             <motion.span class="inline-block" :initial="{ opacity: 0, filter: 'blur(10px)', y: 20 }"
                 :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
                 :transition="{ duration: 0.8, delay: 0.5, ease: 'easeOut' }">
@@ -51,14 +52,46 @@
                 :initial="{ opacity: 0, filter: 'blur(8px)', y: 15 }"
                 :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
                 :transition="{ duration: 1, delay: 0.9, ease: 'easeOut' }">
-                en seulement <span class="text-yellow-500">4h/semaine</span>.
+                en seulement <span class="text-yellow-500">4h/semaine</span>
+            </motion.span>
+            <br>
+            <motion.span
+                class="font-normal text-gray-700 dark:text-gray-300 inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                :initial="{ opacity: 0, filter: 'blur(8px)', y: 15 }"
+                :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
+                :transition="{ duration: 1, delay: 1.0, ease: 'easeOut' }">
+                pour
+            </motion.span>
+            {{ ' ' }}
+            <motion.span
+                class="font-normal text-gray-700 dark:text-gray-300 inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                :initial="{ opacity: 0, filter: 'blur(8px)', y: 15 }"
+                :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
+                :transition="{ duration: 1, delay: 1.1, ease: 'easeOut' }">
+                remplir
+            </motion.span>
+            {{ ' ' }}
+            <motion.span
+                class="font-normal text-gray-700 dark:text-gray-300 inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                :initial="{ opacity: 0, filter: 'blur(8px)', y: 15 }"
+                :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
+                :transition="{ duration: 1, delay: 1.2, ease: 'easeOut' }">
+                ton
+            </motion.span>
+            {{ ' ' }}
+            <motion.span
+                class="font-normal text-gray-700 dark:text-gray-300 inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                :initial="{ opacity: 0, filter: 'blur(8px)', y: 15 }"
+                :animate="{ opacity: 1, filter: 'blur(0px)', y: 0 }"
+                :transition="{ duration: 1, delay: 1.3, ease: 'easeOut' }">
+                agenda.
             </motion.span>
         </h1>
 
         <!-- Subtitle -->
         <motion.div class="max-w-2xl mx-auto" :initial="{ opacity: 0, y: 20 }" :animate="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.7, delay: 1.0, ease: 'easeOut' }">
-            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 Pas besoin de caméra, pas besoin d'y passer 10h, pas besoin d'être un expert. Avec ton téléphone et la
                 bonne
                 méthode, tu peux attirer plus de clients dès maintenant.
@@ -183,7 +216,7 @@ const joinWaitlist = async () => {
     try {
         await $fetch<{ success: boolean; message: string }>('/api/klaviyo/subscribe', {
             method: 'POST',
-            body: { email: email.value }
+            body: { email: email.value, consent: true }
         })
 
         // Redirect to thank you page

@@ -13,7 +13,7 @@
                         {{ displayCount }}ème
                     </motion.span>
                 </motion.span>
-                <span class="ml-1">indépendant inscrit</span>
+                <span>indépendant(s) inscrit(s)</span>
             </span>
         </div>
     </motion.div>

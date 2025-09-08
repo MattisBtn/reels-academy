@@ -1,13 +1,20 @@
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const { email } = body;
+    const { email, consent } = body as { email?: string; consent?: boolean };
 
     // Validation de l'email
     if (!email || !email.includes("@")) {
       throw createError({
         statusCode: 400,
         statusMessage: "Email invalide",
+      });
+    }
+
+    if (!consent) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "Le consentement est requis",
       });
     }
 
@@ -22,67 +29,63 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const profileResponse = await $fetch<{
+    const requestBody = {
       data: {
-        id: string;
-        type: string;
+        type: "profile-subscription-bulk-create-job",
         attributes: {
-          email: string;
-        };
-      };
-    }>("https://a.klaviyo.com/api/profiles/", {
-      method: "POST",
-      headers: {
-        Authorization: `Klaviyo-API-Key ${klaviyoPrivateKey}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Revision: "2025-07-15",
-      },
-      body: {
-        data: {
-          type: "profile",
-          attributes: {
-            email: email,
-            properties: {
-              $email: email,
-              $first_name: "",
-              $last_name: "",
-              $source: "landing_page",
+          profiles: {
+            data: [
+              {
+                type: "profile",
+                attributes: {
+                  email: email,
+                  subscriptions: {
+                    email: {
+                      marketing: {
+                        consent: "SUBSCRIBED",
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          custom_source: "landing_page",
+        },
+        relationships: {
+          list: {
+            data: {
+              type: "list",
+              id: klaviyoListId,
             },
           },
         },
       },
-    });
+    };
 
-    const subscriptionResponse = await $fetch(
-      `https://a.klaviyo.com/api/lists/${klaviyoListId}/relationships/profiles/`,
+    interface KlaviyoBulkJobResponse {
+      data?: { id?: string };
+    }
+
+    const bulkSubscribeJob = await $fetch<KlaviyoBulkJobResponse>(
+      "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
       {
         method: "POST",
         headers: {
           Authorization: `Klaviyo-API-Key ${klaviyoPrivateKey}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          "Content-Type": "application/vnd.api+json",
+          Accept: "application/vnd.api+json",
           Revision: "2025-07-15",
         },
-        body: {
-          data: [
-            {
-              type: "profile",
-              id: profileResponse.data.id,
-            },
-          ],
-        },
+        body: requestBody,
       }
     );
-
-    console.log("Klaviyo subscription response:", subscriptionResponse);
 
     return {
       success: true,
       message: "Inscription réussie !",
       data: {
-        profileId: profileResponse.data.id,
-        subscriptionId: "added_to_list",
+        jobId: bulkSubscribeJob?.data?.id ?? null,
       },
     };
   } catch (error: unknown) {
